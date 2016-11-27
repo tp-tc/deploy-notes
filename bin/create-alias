@@ -1,0 +1,51 @@
+#!/usr/bin/python
+
+from sys import argv
+
+import boto3
+
+client = boto3.client("route53")
+
+if len(argv) != 3:
+    raise Exception("wrong number of arguments")
+
+HOSTNAME = argv[1]
+ADDRESS = argv[2]
+
+class NotInZone(Exception):
+    pass
+
+def get_zone_id(server_name):
+    zones = sorted(
+        (z for z
+         in client.list_hosted_zones()['HostedZones']
+         if server_name.rstrip(u'.')
+            .endswith(u'.' + z['Name'].rstrip(u'.'))),
+        key=lambda z: len(z['Name']),
+        reverse=True)
+    if len(zones) == 0:
+        raise NotInZone(server_name=server_name, zone_name=None)
+    return zones[0]['Id']
+
+zone_id = get_zone_id(HOSTNAME)
+response = client.change_resource_record_sets(
+    HostedZoneId=zone_id,
+    ChangeBatch={
+        'Comment': 'Dynamic DNS Update',
+        'Changes': [
+            {
+                'Action': 'UPSERT',
+                'ResourceRecordSet': {
+                    'Name': HOSTNAME,
+                    'Type': 'CNAME',
+                    'TTL': 60,
+                    'ResourceRecords': [
+                        {
+                            'Value': ADDRESS,
+                        },
+                    ],
+                }
+            },
+        ]
+    }
+)
