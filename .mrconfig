@@ -1,0 +1,33 @@
+
+[taskcluster-client]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-client' 'taskcluster-client'
+
+[taskcluster-lib-monitor]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-lib-monitor' 'taskcluster-lib-monitor'
+
+[taskcluster-lib-api]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-lib-api' 'taskcluster-lib-api'
+
+[taskcluster-queue]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-queue' 'taskcluster-queue'
+
+[taskcluster-tools]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-tools' 'taskcluster-tools'
+
+[taskcluster-auth]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-auth' 'taskcluster-auth'
+
+[taskcluster-base]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-base' 'taskcluster-base'
+
+[taskcluster-login]
+checkout = git clone 'https://github.com/taskcluster/taskcluster-login' 'taskcluster-login'
+
+[aws-provisioner]
+checkout = git clone 'https://github.com/taskcluster/aws-provisioner' 'aws-provisioner'
+
+[acme]
+checkout = git clone 'https://github.com/tp-tc/acme' 'acme'
+
+[docker-worker]
+checkout = git clone 'https://github.com/taskcluster/docker-worker' 'docker-worker'
