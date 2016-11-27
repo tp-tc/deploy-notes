@@ -1,0 +1,23 @@
+#!/usr/bin/python2
+
+from sys import argv, exit
+from subprocess import call
+from os.path import basename
+
+apps = [
+    'tp-tc-queue',
+    'tp-tc-auth',
+]
+
+if len(argv) > 1:
+    raise Exception("Call as `on` or `off`")
+
+state = {'off': 0, 'on': 1}[basename(argv[0])]
+
+retcode = 0
+for app in apps:
+    retcode = retcode or call([
+        'heroku', 'scale', '--app', app, 'web={}'.format(state),
+    ])
+
+exit(retcode)
