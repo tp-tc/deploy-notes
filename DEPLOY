@@ -1,0 +1,30 @@
+- Create sentry account and API key. (API Key, not auth token)
+  TODO: Determine minimal required scopes.
+- Create azure storage account
+  - Settings: ...
+
+
+- Create root credentials?
+  - This should perhaps be a separate bootstrap script
+
+
+- Deploy auth.
+
+
+- Deploy tools
+
+- Deploy queue
+  - Create tc-client with scope     auth:sentry:taskcluster-queue
+  - Create S3 buckets for public and private artifacts
+  - AWS User with ...
+    - s3 access to buckets
+
+
+
+FIXES for external deployment.
+- Refactor taskcluster-tools to get URLs from config.
+- Refactor taskcluster-client to make baseURL configurable with requiring specifying full URLs.
+- taskcluster-tools deploy has too much parallelism
+
+
+Is https://github.com/taskcluster/taskcluster-jobqueue still a thing?
